@@ -5,7 +5,7 @@
 */
 #include "SDL_config.h"
 
-#ifdef __WIN32__
+#ifdef _WIN32
 
 /* Include this so we define UNICODE properly */
 #include "../../core/windows/SDL_windows.h"
@@ -204,6 +204,6 @@ WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR szCmdLine, int sw)
     return main_getcmdline();
 }
 
-#endif /* __WIN32__ */
+#endif /* _WIN32 */
 
 /* vi: set ts=4 sw=4 expandtab: */

@@ -38,7 +38,7 @@
 
 /* C datatypes */
 /* Define SIZEOF_VOIDP for 64/32 architectures */
-#ifdef __LP64__
+#if defined __LP64__ || defined _WIN64
 #define SIZEOF_VOIDP 8
 #else
 #define SIZEOF_VOIDP 4
@@ -80,7 +80,7 @@
 #cmakedefine HAVE_REALLOC 1
 #cmakedefine HAVE_FREE 1
 #cmakedefine HAVE_ALLOCA 1
-#ifndef __WIN32__ /* Don't use C runtime versions of these on Windows */
+#ifndef _WIN32 /* Don't use C runtime versions of these on Windows */
 #cmakedefine HAVE_GETENV 1
 #cmakedefine HAVE_SETENV 1
 #cmakedefine HAVE_PUTENV 1
@@ -185,7 +185,7 @@
 #cmakedefine HAVE_GETAUXVAL 1
 #cmakedefine HAVE_POLL 1
 
-#elif __WIN32__
+#elif _WIN32
 #cmakedefine HAVE_STDARG_H 1
 #cmakedefine HAVE_STDDEF_H 1
 #cmakedefine HAVE_FLOAT_H 1
@@ -324,6 +324,7 @@
 #cmakedefine SDL_VIDEO_DRIVER_DIRECTFB_DYNAMIC @SDL_VIDEO_DRIVER_DIRECTFB_DYNAMIC@
 #cmakedefine SDL_VIDEO_DRIVER_DUMMY @SDL_VIDEO_DRIVER_DUMMY@
 #cmakedefine SDL_VIDEO_DRIVER_WINDOWS @SDL_VIDEO_DRIVER_WINDOWS@
+#cmakedefine SDL_VIDEO_DRIVER_WINRT @SDL_VIDEO_DRIVER_WINRT@
 #cmakedefine SDL_VIDEO_DRIVER_WAYLAND @SDL_VIDEO_DRIVER_WAYLAND@
 #cmakedefine SDL_VIDEO_DRIVER_RPI @SDL_VIDEO_DRIVER_RPI@
 #cmakedefine SDL_VIDEO_DRIVER_VIVANTE @SDL_VIDEO_DRIVER_VIVANTE@
@@ -411,7 +412,7 @@
 #cmakedefine SDL_LIBSAMPLERATE_DYNAMIC @SDL_LIBSAMPLERATE_DYNAMIC@
 
 /* Platform specific definitions */
-#if !defined(__WIN32__)
+#if !defined(_WIN32)
 #  if !defined(_STDINT_H_) && !defined(_STDINT_H) && !defined(HAVE_STDINT_H) && !defined(_HAVE_STDINT_H)
 typedef unsigned int size_t;
 typedef signed char int8_t;
@@ -424,7 +425,7 @@ typedef signed long long int64_t;
 typedef unsigned long long uint64_t;
 typedef unsigned long uintptr_t;
 #  endif /* if (stdint.h isn't available) */
-#else /* __WIN32__ */
+#else /* _WIN32 */
 #  if !defined(_STDINT_H_) && !defined(HAVE_STDINT_H) && !defined(_HAVE_STDINT_H)
 #    if defined(__GNUC__) || defined(__DMC__) || defined(__WATCOMC__)
 #define HAVE_STDINT_H	1
@@ -468,6 +469,6 @@ typedef unsigned int size_t;
 typedef unsigned int uintptr_t;
 #    endif /* __GNUC__ || _MSC_VER */
 #  endif /* !_STDINT_H_ && !HAVE_STDINT_H */
-#endif /* __WIN32__ */
+#endif /* _WIN32 */
 
 #endif /* SDL_config_h_ */
